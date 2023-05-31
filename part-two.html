@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style></style>
+</head>
+<body>
+    <h1>Movie Ratings App</h1>
+    <form id="movieForm">
+        <input type="text" id="titleInput" required placeholder="Movie Name" minlength="2">
+        <input type="number" id="ratingInput" min="1" max="10" required placeholder="Rating">
+        <button type="submit">Submit</button>
+    </form>
+    <div id="moviesList">
+
+    </div>
+    <script>
+        $(document).ready(function() {
+     
+      function addMovie(title, rating) {
+        let movie = $('<div class="movie"></div>');
+        let titleElement = $('<h2>' + title + '</h2>');
+        let ratingElement = $('<p>Rating: ' + rating + '</p>');
+        let removeButton = $('<button>Remove</button>');
+
+       
+        removeButton.click(function() {
+          movie.remove();
+        });
+
+        movie.append(titleElement);
+        movie.append(ratingElement);
+        movie.append(removeButton);
+        $('#moviesList').append(movie);
+      }
+
+      
+      $('#movieForm').submit(function(event) {
+        event.preventDefault(); 
+        let title = $('#titleInput').val();
+        let rating = $('#ratingInput').val();
+
+        addMovie(title, rating);
+
+        
+        $('#titleInput').val('');
+        $('#ratingInput').val('');
+      });
+    });
+    </script>
+</body>
+</html>
